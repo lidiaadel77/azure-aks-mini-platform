@@ -1,0 +1,26 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-flask-api
+  labels:
+    app: aks-flask-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aks-flask-api
+  template:
+    metadata:
+      labels:
+        app: aks-flask-api
+    spec:
+      containers:
+        - name: aks-flask-api
+          image: acraksgh97b.azurecr.io/aks-flask-api:1.0.0
+          ports:
+            - containerPort: 5000
+          env:
+            - name: APP_VERSION
+              value: "1.0.0"
+            - name: APP_ENV
+              value: "aks"
